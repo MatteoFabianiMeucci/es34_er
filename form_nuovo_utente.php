@@ -8,11 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    
     <?php
-        session_start();
-        if (!$_SESSION['isLogged']) {
-            header("Location:http://localhost/es34_er/login.php");
-        }
     ?>
     <div class="container">
         <div class="row">

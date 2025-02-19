@@ -22,6 +22,8 @@
                     <br>
                     <input type="text" name = "password" required>
                     <br>
+                    <input type="checkbox" name="admin"> <label>login per admin</label>
+                    <br>
                     <br>
                     <input type="submit" value="Invia">
                 </form>

@@ -47,23 +47,25 @@
             if(count($_SESSION) == 0){
                 $_SESSION['isLogged'] = false;
             }
-
-            if ($_SESSION['isLogged'] == false) {
-                echo "<div class=\"col col-4 text-end\">
-                        <a href=\"login.php\">login</a>
-                    </div>";
-            } else{
-                echo "<div class=\"col col-4 text-end\">
-                        <a href=\"logout.php\">logout</a>
-                        <br><br>
-                        <a href=\"form_nuovo_concerto.php\">Aggiungi concerto</a>
-                        <br>
-                        <a href=\"lista_utenti.php\">Visualizza la lista degli admin</a>
-                        <br>
-                        <a href=\"form_nuovo_utente.php\">Crea nuovo utente</a>
-                    </div>";
-            }
             ?>
+
+            <div class="col col-4 text-end">
+                <?php
+                    if ($_SESSION['isLogged'] == false){
+                        echo "<a href=\"login.php\">login</a>
+                        <br>
+                            <a href=\"form_nuovo_utente.php\">sign up</a>";
+                    } else if ($_SESSION['isLogged'] && $_SESSION['isAdmin']){
+                        echo "<a href=\"logout.php\">logout</a>
+                             <br><br>
+                             <a href=\"form_nuovo_concerto.php\">Aggiungi concerto</a>
+                             <br>
+                             <a href=\"lista_utenti.php\">Visualizza la lista degli admin</a>
+                             <br>
+                             <a href=\"form_nuovo_admin.php\">Crea nuovo admin</a>";
+                    }
+                ?>
+            </div>
             
         </div>
     </div>

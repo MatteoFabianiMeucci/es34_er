@@ -112,10 +112,16 @@ CREATE TABLE Strumenti_Orchestrali (
     FOREIGN KEY (IdOrchestrale) REFERENCES Orchestrali(IdPersona)
 );
 
+CREATE TABLE Admin (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR (80) NOT NULL,
+    Password VARCHAR (300) NOT NULL
+);
+
 CREATE TABLE Utenti (
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR (80) NOT NULL,
-    password VARCHAR (80) NOT NULL
+    Username VARCHAR (80) NOT NULL,
+    Password VARCHAR (300) NOT NULL
 );
 
 
@@ -222,5 +228,5 @@ INSERT INTO Orchestre_Orchestrali (IdOrchestra, IdOrchestrale) VALUES
 INSERT INTO Strumenti_Orchestrali (IdStrumento, IdOrchestrale) VALUES
     (1, 11), (2, 12), (3, 13), (4, 14), (5, 15), (6, 1), (7, 2), (8, 3), (9, 4), (10, 5);
     
-INSERT INTO Utenti (username, password) VALUES
-	("king_di_informatica", "password_difficile")
+INSERT INTO Admin (Username, Password) VALUES
+	("king_di_informatica", "4f7e891b5261cfdc26d00f99399540f1a1e48de918a96b980fc17bb789207e00")
