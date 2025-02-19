@@ -9,6 +9,10 @@
 </head>
 <body>
     <?php
+        session_start();
+        if (!$_SESSION['isLogged']) {
+            header("Location:http://localhost/es34_er/login.php");
+        }
         include("connessione.php");
         $connessione = mysqli_connect($host, $user, $pass, $db) or die ("<br>Errore di connessione" . mysqli_error($connessione) . " ". mysqli_errno($connessione));
         $query = "SELECT username FROM Utenti";

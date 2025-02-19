@@ -7,5 +7,5 @@
     $query = "INSERT INTO Utenti (username, password) VALUES ('$username', '$password')";
     $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
     
-    header("Location:http://localhost/ES34/index.php"); 
+    header("Location:http://localhost/es34_er/index.php"); 
 ?>

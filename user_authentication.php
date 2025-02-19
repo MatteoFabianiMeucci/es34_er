@@ -11,8 +11,8 @@
     if($count == 1){
         session_start();
         $_SESSION['isLogged'] = true;
-        header("Location:http://localhost/ES34/index.php");
+        header("Location:http://localhost/es34_er/index.php");
     } else{
-        header("Location:http://localhost/ES34/login.php");
+        header("Location:http://localhost/es34_er/login.php");
     }
 ?>
