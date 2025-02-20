@@ -66,6 +66,8 @@
                              <a href=\"form_nuovo_admin.php\">Crea nuovo admin</a>";
                     }else       {
                         echo "<a href=\"logout.php\">logout</a>
+                             <br>
+                             <a href=\"pagine_preferite.php\">Visualizza le pagine preferite</a>
                              <br><br>";
                     }
                 ?>

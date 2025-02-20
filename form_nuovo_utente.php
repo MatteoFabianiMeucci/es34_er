@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col col-4"></div>
             <div class = "border border-black rounded-4 w-25 mx-auto mt-5 col col-4">
-                <form action="inserimento_nuovo_admin.php" method="post" class= "py-5">
+                <form action="inserimento_nuovo_user.php" method="post" class= "py-5">
                     <label class = "text-center"><b>Digita le credenziali dell'account da creare</b></label>    
                     <label>Username:</label>
                     <br>
