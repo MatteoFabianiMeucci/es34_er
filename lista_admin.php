@@ -15,7 +15,7 @@
         }
         include("connessione.php");
         $connessione = mysqli_connect($host, $user, $pass, $db) or die ("<br>Errore di connessione" . mysqli_error($connessione) . " ". mysqli_errno($connessione));
-        $query = "SELECT username FROM Utenti";
+        $query = "SELECT username FROM Admin";
         $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
     
 

@@ -46,13 +46,14 @@
             <?php
             if(count($_SESSION) == 0){
                 $_SESSION['isLogged'] = false;
+                $_SESSION['isAdmin'] = false;
             }
             ?>
 
             <div class="col col-4 text-end">
                 <?php
                     if ($_SESSION['isLogged'] == false){
-                        echo "<a href=\"login.php\">login</a>
+                        echo "<a href=\"login.php\">sign in</a>
                         <br>
                             <a href=\"form_nuovo_utente.php\">sign up</a>";
                     } else if ($_SESSION['isLogged'] && $_SESSION['isAdmin']){
@@ -60,9 +61,12 @@
                              <br><br>
                              <a href=\"form_nuovo_concerto.php\">Aggiungi concerto</a>
                              <br>
-                             <a href=\"lista_utenti.php\">Visualizza la lista degli admin</a>
+                             <a href=\"lista_admin.php\">Visualizza la lista degli admin</a>
                              <br>
                              <a href=\"form_nuovo_admin.php\">Crea nuovo admin</a>";
+                    }else       {
+                        echo "<a href=\"logout.php\">logout</a>
+                             <br><br>";
                     }
                 ?>
             </div>

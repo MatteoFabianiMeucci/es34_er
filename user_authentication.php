@@ -18,6 +18,7 @@
         $_SESSION['isLogged'] = true;
         if($isAdmin){
             $_SESSION['isAdmin'] = true;
+            echo "ci entra";    
         }
         header("Location:http://localhost/es34_er/index.php");
     } else{

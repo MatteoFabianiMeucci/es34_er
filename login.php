@@ -24,6 +24,8 @@
                     <br>
                     <input type="checkbox" name="admin"> <label>login per admin</label>
                     <br>
+                    <a href="form_nuovo_utente.php">Non hai un account?</a>
+                    <br>
                     <br>
                     <input type="submit" value="Invia">
                 </form>
