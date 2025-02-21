@@ -10,10 +10,16 @@
 <body>
     <?php
         session_start();
-        $concerto = $_POST['concerto'];
+        if(!isset($_SESSION['ricorda_concerto']))
+            $_SESSION['ricorda_concerto'] = false;
+        if(!$_SESSION['ricorda_concerto'])
+            $concerto = $_POST['concerto'];
+        else{
+            $concerto = $_SESSION['concerto'];
+            $_SESSION['ricorda_concerto'] = false;
+        }
         include("connessione.php");
-        $connessione = mysqli_connect($host, $user, $pass, $db)
-            or die ("<br>Errore di connessione" . mysqli_error($connessione) . " ". mysqli_errno($connessione));
+        $connessione = mysqli_connect($host, $user, $pass, $db) or die ("<br>Errore di connessione" . mysqli_error($connessione) . " ". mysqli_errno($connessione));
         $query = "SELECT Concerti.Id, Titolo, Descrizione, Data, Sale.Nome AS NomeSala, Capienza, Orchestre.Nome as NomeOrchestra, IdOrchestra FROM Concerti JOIN Sale ON (Concerti.IdSala = Sale.Id) JOIN Orchestre ON (Concerti.IdOrchestra = Orchestre.Id) WHERE Titolo LIKE \"%$concerto%\"";
         $result = mysqli_query($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
     ?>
@@ -31,6 +37,7 @@
                     <th>Orchestra</th>
                 </tr>
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    
                     <tr>
                         <td><?= $row['Titolo']; ?></td>
                         <td><?= $row['Descrizione']; ?></td>
@@ -38,12 +45,31 @@
                         <td><?= $row['NomeSala']; ?></td>
                         <td><?= $row['Capienza']; ?></td>
                         <td><?= $row['NomeOrchestra']; ?></td>
-                        <?php if ($_SESSION['isLogged'] && !$_SESSION['isAdmin']): ?>
+                        
+                        <?php
+                            $connessione2 = mysqli_connect($host, $user, $pass, $db);
+                            $idUtente = $_SESSION['userId'];
+                            $idConcerto = $row['Id'];
+                            $query = "SELECT * FROM Concerti_Utenti WHERE IdUtente = \"$idUtente\" AND IdConcerto = \"$idConcerto\"";
+                            $result2 = mysqli_query ($connessione2, $query) or die ("Query fallita " . mysqli_error($connessione2) . " " . mysqli_errno($connessione2));
+                            $count = mysqli_num_rows($result2);
+                        ?>
+                        <?php if ($_SESSION['isLogged'] && !$_SESSION['isAdmin'] && $count != 1): ?>
                             <td>
                                 <form action="aggiunta_ai_preferiti.php" method="post">
-                                    <input type="hidden" name="idConcerto" value = "<?=$row['Id'];?>">  
+                                    <input type="hidden" name="idConcerto" value = "<?=$idConcerto;?>">  
                                     <input type="hidden" name="idUtente" value = "<?=$_SESSION['userId'];?>">
+                                    <input type="hidden" name="concerto" value = "<?=$concerto;?>">
                                     <input type="submit" value="Metti nei preferiti">
+                                </form>
+                            </td>
+                        <?php else: ?>
+                            <td>
+                                <form action="rimozione_dai_preferiti.php" method="post">
+                                    <input type="hidden" name="idConcerto" value = "<?=$idConcerto;?>">  
+                                    <input type="hidden" name="idUtente" value = "<?=$_SESSION['userId'];?>">
+                                    <input type="hidden" name="concerto" value = "<?=$concerto;?>">
+                                    <input type="submit" value="Togli dai preferiti">
                                 </form>
                             </td>
                         <?php endif;?>
