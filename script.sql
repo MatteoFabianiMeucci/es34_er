@@ -124,6 +124,13 @@ CREATE TABLE Utenti (
     Password VARCHAR (300) NOT NULL
 );
 
+CREATE TABLE Concerti_Utenti(
+	IdConcerto INT,
+    IdUtente INT,
+    PRIMARY KEY (IdConcerto, IdUtente),
+    FOREIGN KEY (IdConcerto) REFERENCES Concerti(Id) ,
+    FOREIGN KEY (IdUtente) REFERENCES Utenti(Id)
+);
 
 -- Popolazione tabelle
 INSERT INTO Sale (Nome, Capienza) VALUES
