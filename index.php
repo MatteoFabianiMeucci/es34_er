@@ -19,7 +19,7 @@
     <div>
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img class = "home_button" src="navbar_home.png" alt="Bottone per tornare alla home"></a>
+                <a class="navbar-brand" href="index.php"><img class = "home_button" src="navbar_home.png" alt="Bottone per tornare alla home"></a>
                 <button class="navbar-toggler home_button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"><img src="navbar_account_icon.png" alt="icona dell'account" class = "w-100 mx-auto"></span>
                 </button>
@@ -47,10 +47,10 @@
                                     <a class="nav-link active" aria-current="page" href="lista_admin.php">Visualizza la lista degli admin</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="form_nuovo_admin.php">Rimuovi account</a>
+                                    <a class="nav-link active" aria-current="page" href="form_nuovo_admin.php">Crea nuovo admin</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="form_rimozione_admin.php">Crea nuovo admin</a>
+                                    <a class="nav-link active" aria-current="page" href="form_rimozione_admin.php">Rimuovi admin</a>
                                 </li>
                             <?php else:?>
                                 <li class="nav-item">
@@ -72,38 +72,37 @@
     <!-- fine navbar -->
         <div class="container">
             <div class="row">
-                <div class="col col-8 text-start">
+                <div class="col col-6 text-start">
                     <form action="ricerca_concerto.php" method="post">
                     <label>Inserisci il titolo del concerto che desideri ascoltare: </label>
                     <input type="search" name="concerto">
                     <input type="submit" value="cerca">
                     </form>
-
-                    <br><br><br>
+                </div>
+                <div class="col col-6 text-start">
                     <form action="ricerca_orchestra.php" method="post">
-                    <label><b>Ricerca del direttore e degli orchestrali di un'orchestra</b></label>
-                    <br>
-                    <label>Nome dell'orchestra: </label>
-                    <select name="orchestra">
-                        <?php
-                            $concerto = $_POST['concerto'];
-                            include("connessione.php");
-                            $connessione = mysqli_connect($host, $user, $pass, $db) or die ("<br>Errore di connessione" . mysqli_error($connessione) . " ". mysqli_errno($connessione));
-                            $query = "SELECT Nome FROM Orchestre";
-                            $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
-                            while ($row = mysqli_fetch_assoc ($result)){
-                                $nome = $row['Nome'];
-                                echo "<option value=\"$nome\">$nome</option>";
-                            }
-                        ?>
-                    </select>
-                    
-
-                    <br>
-                    <input type="submit" value="cerca">
+                        <label><b>Ricerca del direttore e degli orchestrali di un'orchestra</b></label>
+                        <br>
+                        <label>Nome dell'orchestra: </label>
+                        <select name="orchestra">
+                            <?php
+                                $concerto = $_POST['concerto'];
+                                include("connessione.php");
+                                $connessione = mysqli_connect($host, $user, $pass, $db) or die ("<br>Errore di connessione" . mysqli_error($connessione) . " ". mysqli_errno($connessione));
+                                $query = "SELECT Nome FROM Orchestre";
+                                $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
+                            ?> 
+                            <?php while ($row = mysqli_fetch_assoc ($result)):?>
+                                <?php $nome = $row['Nome']?>
+                                <?php echo "<option value=\"$nome\">$nome</option>" ?>
+                            <?php endwhile;?>
+                        </select>
+                        <br>
+                        <input type="submit" value="cerca">
                     </form>
                 </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+            </div>
+        </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

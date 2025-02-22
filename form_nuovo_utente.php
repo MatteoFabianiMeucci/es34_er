@@ -9,14 +9,71 @@
 </head>
 <body>
     
-    <?php
+<?php
+        session_start();
+        if(count($_SESSION) == 0){
+            $_SESSION['isLogged'] = false;
+            $_SESSION['isAdmin'] = false;
+        }
     ?>
-    <div class="container">
-        <div class="row">
-            <div class="col col-4"></div>
-            <div class = "border border-black rounded-4 w-25 mx-auto mt-5 col col-4">
-                <form action="inserimento_nuovo_user.php" method="post" class= "py-5">
-                    <label class = "text-center"><b>Digita le credenziali dell'account da creare</b></label>    
+    <!-- inizio navbar -->
+    <div>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php"><img class = "home_button" src="navbar_home.png" alt="Bottone per tornare alla home"></a>
+                <button class="navbar-toggler home_button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><img src="navbar_account_icon.png" alt="icona dell'account" class = "w-100 mx-auto"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <?php if(!$_SESSION['isLogged']):?>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="login.php">sign in</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_nuovo_utente.php">sign up</a>
+                                </li>
+                            <?php elseif($_SESSION['isLogged'] && $_SESSION['isAdmin']):?>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="logout.php">logout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_nuovo_concerto.php">Aggiungi concerto</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="lista_admin.php">Visualizza la lista degli admin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_nuovo_admin.php">Crea nuovo admin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_rimozione_admin.php">Rimuovi admin</a>
+                                </li>
+                            <?php else:?>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="logout.php">logout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="pagine_preferite.php">Visualizza le pagine preferite</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_rimozione_utente.php">rimozione account</a>
+                                </li>
+                            <?php endif;?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- fine navbar -->
+            <div class = "border border-black rounded-4 w-25 mx-auto mt-5 text-center">
+                <form action="inserimento_nuovo_user.php" method="post" class= "px-auto py-5">
+                    <label class = "text-center"><b>Digitare le credenziali dell'account da creare</b></label>    
                     <label>Username:</label>
                     <br>
                     <input type="text" name = "username" required>
@@ -30,9 +87,6 @@
                     <input type="submit" value="Invia">
                 </form>
             </div>
-            <div class="col col-4 text-end pt-5"><a href="index.php">Torna alla home</a></div>
-        </div>
-    </div>
     
 
    
