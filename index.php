@@ -10,53 +10,62 @@
 <body>
     <?php
         session_start();
+        if(count($_SESSION) == 0){
+            $_SESSION['isLogged'] = false;
+            $_SESSION['isAdmin'] = false;
+        }
     ?>
     <!-- inizio navbar -->
     <div>
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><img class = "home_button" src="navbar_home.png" alt="Bottone per tornare alla home"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler home_button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><img src="navbar_account_icon.png" alt="icona dell'account" class = "w-100 mx-auto"></span>
                 </button>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <?php
-                            if(count($_SESSION) == 0){
-                                $_SESSION['isLogged'] = false;
-                                $_SESSION['isAdmin'] = false;
-                            }
-                        ?>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">    
-                                <?php if($_SESSION['isLogged'] == false):?>
+                            <?php if(!$_SESSION['isLogged']):?>
+                                <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="login.php">sign in</a>
-                                <?php endif;?>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_nuovo_utente.php">sign up</a>
+                                </li>
+                            <?php elseif($_SESSION['isLogged'] && $_SESSION['isAdmin']):?>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="logout.php">logout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_nuovo_concerto.php">Aggiungi concerto</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="lista_admin.php">Visualizza la lista degli admin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_nuovo_admin.php">Rimuovi account</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_rimozione_admin.php">Crea nuovo admin</a>
+                                </li>
+                            <?php else:?>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="logout.php">logout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="pagine_preferite.php">Visualizza le pagine preferite</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="form_rimozione_utente.php">rimozione account</a>
+                                </li>
+                            <?php endif;?>
                         </ul>
-                    <form class="d-flex mt-3" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-            </div>
+                    </div>
+                </div>
             </div>
         </nav>
     </div>
@@ -94,42 +103,6 @@
                     <input type="submit" value="cerca">
                     </form>
                 </div>
-                <?php
-                if(count($_SESSION) == 0){
-                    $_SESSION['isLogged'] = false;
-                    $_SESSION['isAdmin'] = false;
-                }
-                ?>
-
-                <div class="col col-4 text-end">
-                    <?php
-                        if ($_SESSION['isLogged'] == false){
-                            echo "<a href=\"login.php\">sign in</a>
-                            <br>
-                                <a href=\"form_nuovo_utente.php\">sign up</a>";
-                        } else if ($_SESSION['isLogged'] && $_SESSION['isAdmin']){
-                            echo "<a href=\"logout.php\">logout</a>
-                                <br><br>
-                                <a href=\"form_nuovo_concerto.php\">Aggiungi concerto</a>
-                                <br>
-                                <a href=\"lista_admin.php\">Visualizza la lista degli admin</a>
-                                <br>
-                                <a href=\"form_rimozione_admin.php\">Rimuovi account</a>
-                                <br>
-                                <a href=\"form_nuovo_admin.php\">Crea nuovo admin</a>";
-                        }else       {
-                            echo "<a href=\"logout.php\">logout</a>
-                                <br>
-                                <a href=\"pagine_preferite.php\">Visualizza le pagine preferite</a>
-                                <br>
-                                <a href=\"form_rimozione_utente.php\">rimozione account</a>
-                                <br><br>";
-                        }
-                    ?>
-                </div>
-                
-            </div>
-        </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
