@@ -21,16 +21,19 @@
             <a href=\"index.php\">Torna alla home</a>";
         } else{
             $query = "INSERT INTO Admin (Username, Password) VALUES ('$username', '$password')"; 
+            $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
             header("Location:http://localhost/es34_er/index.php");
         }
     }else{
         $query = "SELECT Username FROM Utenti WHERE Username = \"$username\"";
         $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
+        var_dump(mysqli_num_rows($result));
         if(mysqli_num_rows($result) == 1){
             echo "<h1 class = \"text-center\">Utente già esistente</h1>
             <a href=\"index.php\">Torna alla home</a>";
         } else{
             $query = "INSERT INTO Utenti (Username, Password) VALUES ('$username', '$password')";
+            $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
             header("Location:http://localhost/es34_er/index.php");
         }
         

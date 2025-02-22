@@ -114,11 +114,15 @@
                                 <br>
                                 <a href=\"lista_admin.php\">Visualizza la lista degli admin</a>
                                 <br>
+                                <a href=\"form_rimozione_admin.php\">Rimuovi account</a>
+                                <br>
                                 <a href=\"form_nuovo_admin.php\">Crea nuovo admin</a>";
                         }else       {
                             echo "<a href=\"logout.php\">logout</a>
                                 <br>
                                 <a href=\"pagine_preferite.php\">Visualizza le pagine preferite</a>
+                                <br>
+                                <a href=\"form_rimozione_utente.php\">rimozione account</a>
                                 <br><br>";
                         }
                     ?>
