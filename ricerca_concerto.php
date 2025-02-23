@@ -14,6 +14,8 @@
         if(count($_SESSION) == 0){
             $_SESSION['isLogged'] = false;
             $_SESSION['isAdmin'] = false;
+            $_SESSION['userId'] = null;
+            $_SESSION['adminId'] = null;
         }
         if(!isset($_SESSION['ricorda_concerto']))
             $_SESSION['ricorda_concerto'] = false;

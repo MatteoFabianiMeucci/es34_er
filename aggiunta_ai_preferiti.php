@@ -1,4 +1,6 @@
 <?php
+    if(!isset($_POST['idUtente']) || !isset($_POST['idConcerto']))
+        header("Location:http://localhost/es34_er/index.php");
     session_start();
     if($_SESSION['isAdmin'])
         header("Location:http://localhost/es34_er/index.php");

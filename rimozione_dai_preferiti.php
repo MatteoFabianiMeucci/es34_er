@@ -2,6 +2,8 @@
     session_start();
     if($_SESSION['isAdmin'])
         header("Location:http://localhost/es34_er/index.php");
+    if(!isset($_POST['idUtente']) || $_POST['idConcerto'])
+        header("Location:http://localhost/es34_er/index.php");
     $idUtente = $_POST['idUtente'];
     $idConcerto = $_POST['idConcerto'];
     include("connessione.php");

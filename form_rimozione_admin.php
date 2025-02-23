@@ -8,12 +8,16 @@
     <title>Document</title>
 </head>
 <body>
-    
-<?php
+    <?php
         session_start();
         if(count($_SESSION) == 0){
             $_SESSION['isLogged'] = false;
             $_SESSION['isAdmin'] = false;
+            $_SESSION['userId'] = null;
+            $_SESSION['adminId'] = null;
+        }
+        if (!$_SESSION['isLogged'] && !$_SESSION['isAdmin']) {
+            header("Location:http://localhost/es34_er/login.php");
         }
     ?>
     <!-- inizio navbar -->
@@ -71,17 +75,14 @@
         </nav>
     </div>
     <!-- fine navbar -->
-    <div class="container">
-        <div class="row">
-            <div class="col col-4"></div>
-            <div class = "border border-black rounded-4 w-25 mx-auto mt-5 col col-4">
-                <form action="rimozione_admin.php" method="post" class= "py-5">
+            <div class = "border border-black rounded-4 w-25 mx-auto mt-5 text-center pb-5">
+                <form action="rimozione_admin.php" method="post" class= "px-auto py-5">
                     <label class = "text-center"><b>Digita le credenziali dell'account da cancellare</b></label>    
-                    <label>Username:</label>
+                    <label>Username</label>
                     <br>
                     <input type="text" name = "username" required>
                     <br>
-                    <label>Password:</label>
+                    <label>Password</label>
                     <br>
                     <input type="text" name = "password" required>
                     <br>
@@ -89,9 +90,6 @@
                     <input type="submit" value="Invia">
                 </form>
             </div>
-            <div class="col col-4 text-end pt-5"><a href="index.php">Torna alla home</a></div>
-        </div>
-    </div>
     
 
    

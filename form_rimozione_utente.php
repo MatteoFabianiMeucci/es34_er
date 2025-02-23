@@ -8,12 +8,13 @@
     <title>Document</title>
 </head>
 <body>
-    
-<?php
+    <?php
         session_start();
         if(count($_SESSION) == 0){
             $_SESSION['isLogged'] = false;
             $_SESSION['isAdmin'] = false;
+            $_SESSION['userId'] = null;
+            $_SESSION['adminId'] = null;
         }
     ?>
     <!-- inizio navbar -->
@@ -74,11 +75,11 @@
     <div class = "border border-black rounded-4 w-25 mx-auto mt-5 text-center">
         <form action="rimozione_utente.php" method="post" class= "px-auto py-5">
             <label class = "text-center"><b>Digita le credenziali dell'account da cancellare</b></label>    
-            <label>Username:</label>
+            <label>Username</label>
             <br>
             <input type="text" name = "username" required>
             <br>
-            <label>Password:</label>
+            <label>Password</label>
             <br>
             <input type="text" name = "password" required>
             <br>

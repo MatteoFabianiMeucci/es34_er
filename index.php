@@ -13,6 +13,8 @@
         if(count($_SESSION) == 0){
             $_SESSION['isLogged'] = false;
             $_SESSION['isAdmin'] = false;
+            $_SESSION['userId'] = null;
+            $_SESSION['adminId'] = null;
         }
     ?>
     <!-- inizio navbar -->
@@ -31,14 +33,14 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <?php if(!$_SESSION['isLogged']):?>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="login.php">sign in</a>
+                                    <a class="nav-link active" aria-current="page" href="login.php">Sign in</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="form_nuovo_utente.php">sign up</a>
+                                    <a class="nav-link active" aria-current="page" href="form_nuovo_utente.php">Sign up</a>
                                 </li>
                             <?php elseif($_SESSION['isLogged'] && $_SESSION['isAdmin']):?>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="logout.php">logout</a>
+                                    <a class="nav-link active" aria-current="page" href="logout.php">Logout</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="form_nuovo_concerto.php">Aggiungi concerto</a>
@@ -54,13 +56,13 @@
                                 </li>
                             <?php else:?>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="logout.php">logout</a>
+                                    <a class="nav-link active" aria-current="page" href="logout.php">Logout</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="pagine_preferite.php">Visualizza le pagine preferite</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="form_rimozione_utente.php">rimozione account</a>
+                                    <a class="nav-link active" aria-current="page" href="form_rimozione_utente.php">Rimozione account</a>
                                 </li>
                             <?php endif;?>
                         </ul>

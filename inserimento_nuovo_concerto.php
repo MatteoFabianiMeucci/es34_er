@@ -1,4 +1,6 @@
 <?php
+    if(!isset($_POST['descrizione']) || !isset($_POST['titolo']) || !isset($_POST['data']) || !isset($_POST['sala']) || !isset($_POST['orchestra']))
+        header("Location:http://localhost/es34_er/index.php");
     $descrizione = $_POST['descrizione'];
     $titolo = $_POST['titolo'];
     $data = $_POST['data'];

@@ -1,4 +1,6 @@
 <?php
+    if(!isset($_POST['username']) || $_POST['password'])
+        header("Location:http://localhost/es34_er/index.php");
     $username = $_POST['username'];
     $password = $_POST['password'];
     $password = hash('sha256', $password);

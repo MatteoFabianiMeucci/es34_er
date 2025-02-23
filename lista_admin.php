@@ -10,11 +10,16 @@
 
 <body>
 <?php
-        session_start();
-        if(count($_SESSION) == 0){
-            $_SESSION['isLogged'] = false;
-            $_SESSION['isAdmin'] = false;
-        }
+    session_start();
+    if(count($_SESSION) == 0){
+        $_SESSION['isLogged'] = false;
+        $_SESSION['isAdmin'] = false;
+        $_SESSION['userId'] = null;
+        $_SESSION['adminId'] = null;
+    }
+    if (!$_SESSION['isLogged'] && !$_SESSION['isAdmin']) {
+        header("Location:http://localhost/es34_er/login.php");
+    }
     ?>
     <!-- inizio navbar -->
     <div>

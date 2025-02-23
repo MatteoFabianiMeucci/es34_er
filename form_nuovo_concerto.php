@@ -9,13 +9,15 @@
 </head>
 <body>
     <?php
-        session_start();
-        if (!$_SESSION['isLogged']) {
-            header("Location:http://localhost/es34_er/login.php");
-        }
         if(count($_SESSION) == 0){
             $_SESSION['isLogged'] = false;
             $_SESSION['isAdmin'] = false;
+            $_SESSION['userId'] = null;
+            $_SESSION['adminId'] = null;
+        }
+        session_start();
+        if (!$_SESSION['isLogged'] && !$_SESSION['isAdmin']) {
+            header("Location:http://localhost/es34_er/login.php");
         }
     ?>
     <!-- inizio navbar -->
@@ -73,7 +75,7 @@
         </nav>
     </div>
     <!-- fine navbar -->
-    <div class = "border border-black rounded-4 w-25 mx-auto mt-5 text-center">
+    <div class = "border border-black rounded-4 w-25 mx-auto mt-5 text-center pb-5">
         <form action="inserimento_nuovo_concerto.php" method="post" class= "px-auto py-5">
             <label class = "text-center"><b>Aggiungi i dettagli di un concerto</b></label>    
             <label>Descrizione:</label>

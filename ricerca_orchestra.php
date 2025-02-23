@@ -86,8 +86,8 @@
                     $query = "SELECT InfoDirettori.Nome, InfoDirettori.Cognome FROM Orchestre JOIN InfoDirettori ON (Orchestre.Direttore = InfoDirettori.Id) WHERE Orchestre.Nome = \"$orchestra\"";
                     $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
                     $row = mysqli_fetch_assoc ($result);
-                    echo "<span>" . $row['Cognome'] . " " . $row['Nome'] ."</span>";
                 ?>
+                <span><?= $row['Cognome'] . " " . $row['Nome']?></span>
             </div>
 
 
@@ -100,10 +100,10 @@
                         $connessione = mysqli_connect($host, $user, $pass, $db) or die ("<br>Errore di connessione" . mysqli_error($connessione) . " ". mysqli_errno($connessione));
                         $query = "SELECT InfoOrchestrali.Nome, InfoOrchestrali.Cognome FROM Orchestre JOIN Orchestre_Orchestrali ON (Orchestre.Id = Orchestre_Orchestrali.IdOrchestra) JOIN InfoOrchestrali ON (InfoOrchestrali.Id = Orchestre_Orchestrali.IdOrchestrale) WHERE Orchestre.Nome = \"$orchestra\"";
                         $result = mysqli_query ($connessione, $query) or die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_errno($connessione));
-                        while ($row = mysqli_fetch_assoc ($result)){
-                            echo "<li>" . $row['Cognome'] . " " .  $row['Nome'] . "</li>";
-                        }
                     ?>
+                    <?php while($row = mysqli_fetch_assoc ($result)): ?>
+                        <li> <?= $row['Cognome'] . " " .  $row['Nome'] ?> </li>
+                    <?php endwhile;?>
                 </ul>
             </div>
         </div>
